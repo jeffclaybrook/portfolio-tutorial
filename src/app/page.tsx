@@ -1,101 +1,112 @@
-import Image from "next/image";
+"use client"
+
+import Link from "next/link"
+import AboutGrid from "@/components/about-grid"
+import ArtboardsCarousel from "@/components/artboards-carousel"
+import Faqs from "@/components/faqs"
+import Form from "@/components/form"
+import ForwardButton from "@/components/forward-button"
+import Header from "@/components/header"
+import Main from "@/components/main"
+import ProjectsGrid from "@/components/projects-grid"
+import Section from "@/components/section"
+import SkillsGrid from "@/components/skills-grid"
+import Testimonial from "@/components/testimonial"
+import { useTypewriter } from "react-simple-typewriter"
+import { Button } from "@/components/ui/button"
+import { Github, Resume } from "@/components/icons"
+import { testimonials } from "@/lib/data"
+
+const words = [
+  "product manager.",
+  "frontend developer.",
+  "UX/UI designer.",
+  "content creator.",
+  "QA & debugger.",
+  "technical writer."
+]
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [text] = useTypewriter({
+    words: words,
+    loop: 0,
+    typeSpeed: 125,
+    deleteSpeed: 50,
+    delaySpeed: 2050
+  })
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  return (
+    <>
+      <Header image="images/hero-1.webp">
+        <h1 className="text-4xl lg:text-5xl font-light text-slate-300 mb-2">
+          Hi, my name is <strong className="font-bold text-slate-50">Jeff</strong>
+        </h1>
+        <p className="text-2xl text-slate-300 mb-4">
+          and I&apos;m a <strong className="font-bold text-slate-50">{text}</strong>
+        </p>
+        <div className="flex gap-4">
+          <Button variant="custom" size="lg" asChild>
+            <Link href="/Jeff_Claybrook_Resume.pdf" aria-label="My resume">
+              <Resume className="mr-2" />
+              My Resume
+            </Link>
+          </Button>
+          <Button variant="secondary" size="lg" asChild>
+            <a href="https://github.com/jeffclaybrook" target="_blank" rel="noreferrer" aria-label="My GitHub">
+              <Github className="mr-2" />
+              My GitHub
+            </a>
+          </Button>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+      </Header>
+      <Main>
+        <Section title="About" id="about" subtitle="A little bit about me and what I bring to the party">
+          <AboutGrid />
+          <ForwardButton href={"/about"} label="More About Me" />
+        </Section>
+        <Testimonial
+          quote={testimonials[0].quote}
+          name={testimonials[0].name}
+          title={testimonials[0].title}
+          image={testimonials[0].image}
+        />
+        <Section title="Skills" id="skills" subtitle="I'm a Jeff of all trades">
+          <SkillsGrid />
+          <ForwardButton href={"/skills"} label="More Skills" />
+        </Section>
+        <Testimonial
+          quote={testimonials[1].quote}
+          name={testimonials[1].name}
+          title={testimonials[1].title}
+          image={testimonials[1].image}
+        />
+        <Section title="Projects" id="projects" subtitle="A few sample projects you can demo">
+          <ProjectsGrid />
+          <ForwardButton href={"/projects"} label="More Projects" />
+        </Section>
+        <Testimonial
+          quote={testimonials[2].quote}
+          name={testimonials[2].name}
+          title={testimonials[2].title}
+          image={testimonials[2].image}
+        />
+        <Section title="Artboards" id="artboards" subtitle="Getting the most out of every pixel">
+          <ArtboardsCarousel />
+          <ForwardButton href={"/artboards"} label="More Artboards" />
+        </Section>
+        <Section title="FAQs" id="faqs" subtitle="Frequently asked questions">
+          <Faqs />
+        </Section>
+        <Testimonial
+          quote={testimonials[3].quote}
+          name={testimonials[3].name}
+          title={testimonials[3].title}
+          image={testimonials[3].image}
+        />
+        <Section title="Contact" id="contact" subtitle="Let's get in touch!">
+          <Form />
+        </Section>
+      </Main>
+    </>
+  )
 }
